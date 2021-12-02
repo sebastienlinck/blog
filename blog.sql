@@ -23,14 +23,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `actus`
+-- Structure de la table `news`
 --
 
-CREATE TABLE `actus` (
-  `ida` int(11) NOT NULL,
-  `titre` varchar(100) NOT NULL,
-  `contenu` text NOT NULL,
-  `auteur` int(11) NOT NULL,
+CREATE TABLE `news` (
+  `idn` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `content` text NOT NULL,
+  `author` int(11) NOT NULL,
   `date` datetime NOT NULL,
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -38,17 +38,17 @@ CREATE TABLE `actus` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `membres`
+-- Structure de la table `users`
 --
 
-CREATE TABLE `membres` (
-  `idm` int(11) NOT NULL,
+CREATE TABLE `users` (
+  `idu` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `nom` varchar(50) NOT NULL,
-  `prenom` varchar(50) NOT NULL,
-  `mdp` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `firstnae` varchar(50) NOT NULL,
+  `pwd` varchar(50) NOT NULL,
   `admin` tinyint(1) NOT NULL,
-  `actif` int(11) NOT NULL
+  `active` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -56,15 +56,15 @@ CREATE TABLE `membres` (
 --
 
 --
--- Index pour la table `actus`
+-- Index pour la table `news`
 --
-ALTER TABLE `actus`
+ALTER TABLE `news`
   ADD PRIMARY KEY (`ida`);
 
 --
--- Index pour la table `membres`
+-- Index pour la table `users`
 --
-ALTER TABLE `membres`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`idm`);
 
 --
@@ -72,15 +72,15 @@ ALTER TABLE `membres`
 --
 
 --
--- AUTO_INCREMENT pour la table `actus`
+-- AUTO_INCREMENT pour la table `news`
 --
-ALTER TABLE `actus`
-  MODIFY `ida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `news`
+  MODIFY `idn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
--- AUTO_INCREMENT pour la table `membres`
+-- AUTO_INCREMENT pour la table `users`
 --
-ALTER TABLE `membres`
-  MODIFY `idm` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users`
+  MODIFY `idu` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

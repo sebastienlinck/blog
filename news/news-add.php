@@ -16,8 +16,8 @@
 	<body>
 		<h1>Ajout d'une actualité</h1>
 		<form method="post" enctype="multipart/form-data">
-			Titre : <input type="text" name="title"><br>
-			Contenu : <textarea name="content"></textarea><br>
+			Titre : <input type="text" name="title" required><br>
+			Contenu : <textarea name="content" required></textarea><br>
 			Image : <input type="file" name="image"><br>
 			<input type="submit" name="ajouter" value="Ajouter l'actualité"><br>
 		</form>
