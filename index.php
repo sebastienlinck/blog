@@ -1,12 +1,12 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['idm']) or !isset($_SESSION['nom']) or !isset($_SESSION['prenom']) or !isset($_SESSION['email']))
+	if(!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSION['firstname']) or !isset($_SESSION['email']))
 	{
-		$connecte=false;
+		$connect=false;
 	}
 	else
 	{
-		$connecte=true;
+		$connect=true;
 	}
 ?>
 <!doctype html>
@@ -20,18 +20,18 @@
 	<body>
 		<h1>Blog d'actualités</h1>
 		<?php
-			if($connecte==false)
+			if($connect==false)
 			{
-				echo '<a href="membres/inscription.php">S\'inscrire</a><br>';
+				echo '<a href="users/inscription.php">S\'inscrire</a><br>';
 				echo '<a href="login.php">Se connecter</a><br>';
 			}
 			else 
 			{
-				echo '<a href="actus/ajout-actus.php">Ajout d\'une actualité</a><br>';
-				echo '<a href="membres/deconnexion.php">Se déconnecter</a><br>';
+				echo '<a href="actus/news-add.php">Ajout d\'une actualité</a><br>';
+				echo '<a href="users/deconnexion.php">Se déconnectr</a><br>';
 				if($_SESSION['admin']==1)
 				{
-					echo '<a href="membres/activation.php">Activation des membres</a><br>';
+					echo '<a href="users/activation.php">Activation des users</a><br>';
 				}
 			}
 			include('config/bdd.php');
@@ -45,15 +45,15 @@
 			else
 			{
 				echo "<table border=1>";
-				while($tableau=mysqli_fetch_assoc($res))
+				while($infos=mysqli_fetch_assoc($res))
 				{
 					$ligne="<tr>";
-					$ligne.="<td>".$tableau['date']."</td>";
-					$ligne.="<td><a href='actus/details-actus.php?num=".$tableau['ida']."'>".$tableau['titre']."</a></td>";
-					if(($connecte==true)and(($_SESSION['idm']==$tableau['auteur'])or($_SESSION['admin']==1)))
+					$ligne.="<td>".$infos['date']."</td>";
+					$ligne.="<td><a href='actus/news-view.php?num=".$infos['idn']."'>".$infos['title']."</a></td>";
+					if(($connect==true)and(($_SESSION['idu']==$infos['author'])or($_SESSION['admin']==1)))
 					{
-						$ligne.="<td><a href='actus/modif-actus.php?num=".$tableau['ida']."'>Modifier</a></td>";
-						$ligne.="<td><a href='actus/suppr-actus.php?num=".$tableau['ida']."'>Supprimer</a></td>";
+						$ligne.="<td><a href='actus/news-edit.php?num=".$infos['idn']."'>Modifier</a></td>";
+						$ligne.="<td><a href='actus/news-remove.php?num=".$infos['idn']."'>Supprimer</a></td>";
 					}
 					$ligne.="</tr>";
 					echo $ligne;
