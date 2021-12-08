@@ -26,7 +26,7 @@
 				$content=nettoyage($lien,$_REQUEST['content']);
 				if($_FILES['image']['name']=="")
 				{
-					$req="UPDATE actus SET title='$title', content='$content' WHERE idn=$num";
+					$req="UPDATE news SET title='$title', content='$content' WHERE idn=$num";
 				}
 				else
 				{
@@ -49,11 +49,11 @@
 					}
 					if($destination=="")
 					{
-						$req="UPDATE actus SET title='$title', content='$content' WHERE idn=$num";
+						$req="UPDATE news SET title='$title', content='$content' WHERE idn=$num";
 					}
 					else
 					{
-						$req="UPDATE actus SET title='$title', content='$content', image='$destination' WHERE idn=$num";
+						$req="UPDATE news SET title='$title', content='$content', image='$destination' WHERE idn=$num";
 					}
 				}
 				$res=mysqli_query($lien,$req);
@@ -71,7 +71,7 @@
 					}
 				}
 			}
-			$req="SELECT * FROM actus WHERE idn=$num";
+			$req="SELECT * FROM news WHERE idn=$num";
 			$res=mysqli_query($lien,$req);
 			if(!$res)
 			{

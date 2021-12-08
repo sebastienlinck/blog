@@ -48,7 +48,7 @@
 					echo "Pas d'image ou image invalide<br>";
 					$destination="";
 				}
-				$req="INSERT INTO actus VALUES(NULL,'$title','$content','$author','$date','$destination')";
+				$req="INSERT INTO news VALUES(NULL,'$title','$content','$author','$date','$destination')";
 				$res=mysqli_query($lien,$req);
 				
 				if(!$res)
