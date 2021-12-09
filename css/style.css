@@ -3,9 +3,59 @@
 	padding: 0;
 	font-family: Verdana;
 	font-size: 1em;
+	box-sizing: border-box;
 }
 
 #page {
 	width: 80%;
 	margin: auto;
+}
+
+h1 {
+	margin: 2em 0;
+}
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+label {
+	margin: .5em 0;
+}
+
+label, textarea, input {
+	display: block;
+	width: 100%;
+	padding: .5em;
+}
+
+textarea {
+	height:10em;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin: 1em auto;
+}
+
+table, td {
+	border: none;
+	padding : .5em;
+	vertical-align: middle;
+}
+
+th, td {
+	border-bottom: 1px solid grey;
+	border-top: 1px solid grey;
+}
+
+.shorttd { 
+	width: 2em;
+	text-align: center;
+}
+
+tr:nth-child(even) {
+	background-color: lightgrey;
 }

@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>Inscription</title>
 		<link rel="stylesheet" href="../css/style.css">
-		<script src=""></script>
+		
 	</head>
 	<body>
 		<div id="page">

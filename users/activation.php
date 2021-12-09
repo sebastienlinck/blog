@@ -12,7 +12,7 @@
 		<meta charset="utf-8">
 		<title>Activation des membres</title>
 		<link rel="stylesheet" href="../css/style.css">
-		<script src=""></script>
+		
 	</head>
 	<body>
 		<div id="page">
