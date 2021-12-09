@@ -15,45 +15,47 @@
 		<script src=""></script>
 	</head>
 	<body>
-		<h1>Activation des membres</h1>
-		<?php
-			include('../config/bdd.php');
-			include('../config/tools.php');
-			$lien=mysqli_connect(SERVEUR,LOGIN,MDP,BASE);
-			
-			if(isset($_REQUEST['num']) and is_numeric($_REQUEST['num']))
-			{
-				$num=nettoyage($lien,$_REQUEST['num']);
-				$req="UPDATE users set active=1 WHERE idu='$num'";
+		<div id="page">
+			<h1>Activation des membres</h1>
+			<?php
+				include('../config/bdd.php');
+				include('../config/tools.php');
+				$lien=mysqli_connect(SERVEUR,LOGIN,MDP,BASE);
+				
+				if(isset($_REQUEST['num']) and is_numeric($_REQUEST['num']))
+				{
+					$num=nettoyage($lien,$_REQUEST['num']);
+					$req="UPDATE users set active=1 WHERE idu='$num'";
+					$res=mysqli_query($lien,$req);
+					if(!$res)
+					{
+						echo "Erreur SQL: $req<br>".mysqli_error($lien);
+					}
+				}
+				$req="SELECT * FROM users WHERE active=0";
 				$res=mysqli_query($lien,$req);
 				if(!$res)
 				{
 					echo "Erreur SQL: $req<br>".mysqli_error($lien);
 				}
-			}
-			$req="SELECT * FROM users WHERE active=0";
-			$res=mysqli_query($lien,$req);
-			if(!$res)
-			{
-				echo "Erreur SQL: $req<br>".mysqli_error($lien);
-			}
-			else
-			{
-				echo "<table>";
-				while($infos=mysqli_fetch_array($res))
+				else
 				{
-					$ligne="<tr>";
-					$ligne.="<td>".$infos['firstname']."</td>";
-					$ligne.="<td>".$infos['lastname']."</td>";
-					$ligne.="<td>".$infos['email']."</td>";
-					$ligne.="<td><a href='activation.php?num=".$infos['idu']."'>Activer</a></td>";
-					$ligne.="</tr>";
-					echo $ligne;
+					echo "<table>";
+					while($infos=mysqli_fetch_array($res))
+					{
+						$ligne="<tr>";
+						$ligne.="<td>".$infos['firstname']."</td>";
+						$ligne.="<td>".$infos['lastname']."</td>";
+						$ligne.="<td>".$infos['email']."</td>";
+						$ligne.="<td><a href='activation.php?num=".$infos['idu']."'>Activer</a></td>";
+						$ligne.="</tr>";
+						echo $ligne;
+					}
+					echo "</table>";
 				}
-				echo "</table>";
-			}
-			mysqli_close($lien);
-		?>
-		<a href="../">Accueil</a>
+				mysqli_close($lien);
+			?>
+			<a href="../">Accueil</a>
+		</div>
 	</body>
 </html>				

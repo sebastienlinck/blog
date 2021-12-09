@@ -4,3 +4,8 @@
 	font-family: Verdana;
 	font-size: 1em;
 }
+
+#page {
+	width: 80%;
+	margin: auto;
+}
