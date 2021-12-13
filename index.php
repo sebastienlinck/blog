@@ -29,9 +29,10 @@
 				{
 					if($_SESSION['admin']==1)
 					{
-						echo '<a href="users/activation.php">Activation des users</a><br>';
+						echo '<a href="users/activation.php">Gestion des membres</a><br>';
 					}
 					echo '<a href="news/news-add.php">Ajout d\'une actualité</a><br>';
+					echo '<a href="users/user-profile.php">Mon profil utilisateur</a><br>';
 					echo '<a href="users/disconnection.php">Se déconnecter</a><br>';
 				}
 				include('config/bdd.php');

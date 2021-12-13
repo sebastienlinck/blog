@@ -13,7 +13,7 @@
 				include('../config/tools.php');			
 				$lien=mysqli_connect(SERVEUR,LOGIN,MDP,BASE);
 				$num=nettoyage($lien,$_REQUEST['num']);
-				$req="SELECT * FROM news WHERE idn=$num";
+				$req="SELECT * FROM news INNER JOIN users ON news.author = users.idu WHERE idn=$num ";
 				$res=mysqli_query($lien,$req);
 				if(!$res)
 				{
@@ -23,7 +23,7 @@
 				{
 					$infos=mysqli_fetch_assoc($res);
 					$html = "<h1>".$infos['title']."</h1>";
-					$html .= "<h2>".$infos['author']."</h2>";
+					$html .= "<h2>".$infos['firstname']." ".$infos['firstname']."</h2>";
 					$html .= "<p>".$infos['content']."</p>";
 					$html .= "<img src='".$infos['image']."'><br>";
 					$html .= "<p>".$infos['date']."</p>";
