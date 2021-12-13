@@ -89,10 +89,10 @@
 					}
 				?>
 				<form method="post" enctype="multipart/form-data">
-					Titre : <input type="text" name="title" value="<?php echo $infos['title'];?>"><br>
-					Contenu : <textarea name="content"><?php echo $infos['content'];?></textarea><br>
-					Ancienne image : <img src="<?php echo $infos['image'];?>"><br>
-					Image : <input type="file" name="image"><br>
+					<label>Titre : </label><input type="text" name="title" value="<?php echo $infos['title'];?>"><br>
+					<label>Contenu : </label><textarea name="content"><?php echo $infos['content'];?></textarea><br>
+					<label>Ancienne image : </label><img src="<?php echo $infos['image'];?>"><br>
+					<label>Nouvelle image : </label><input type="file" name="image"><br>
 					<input type="hidden" name="num" value="<?php echo $num;?>">
 					<input type="hidden" name="ancienneimage" value="<?php echo $infos['image'];?>">
 					<input type="submit" name="modifier" value="Modifier l'actualité"><br>

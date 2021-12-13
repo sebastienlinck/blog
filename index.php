@@ -15,7 +15,6 @@
 		<meta charset="utf-8">
 		<title>Blog d'actualités</title>
 		<link rel="stylesheet" href="css/style.css">
-		
 	</head>
 	<body>
 		<div id="page">
@@ -36,8 +35,19 @@
 					echo '<a href="users/disconnection.php">Se déconnecter</a><br>';
 				}
 				include('config/bdd.php');
+				include('config/tools.php');
 				$lien=mysqli_connect(SERVEUR,LOGIN,MDP,BASE);
-				$req="SELECT * FROM news ORDER BY date DESC";
+				if(!isset($_GET['page']))
+				{
+					$page=1;
+				}
+				else
+				{
+					$page=$_GET['page'];
+				}
+				$parpage=2;
+				$premier=$parpage*($page-1);
+				$req="SELECT * FROM news ORDER BY date DESC LIMIT $premier,$parpage";
 				$res=mysqli_query($lien,$req);
 				if(!$res)
 				{
@@ -60,6 +70,7 @@
 						echo $ligne;
 					}
 					echo "</table>";
+					pagination(2,$page,"index","news", $lien);
 				}
 				mysqli_close($lien);
 			?>
