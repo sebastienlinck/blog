@@ -29,7 +29,7 @@
 					$email2=nettoyage($lien,$_REQUEST['email2']);
 					$pwd1=$_REQUEST['pwd1'];
 					$pwd2=$_REQUEST['pwd2'];
-					if (($email1== $email2) and ($pwd1== $pwd2))
+					if (($email1==$email2) and ($pwd1==$pwd2))
 					{
 						$req="SELECT * FROM users WHERE email='$email1'";
 						$res=mysqli_query($lien,$req);
@@ -41,9 +41,9 @@
 						{
 							$existe=mysqli_num_rows($res);
 							$infos=mysqli_fetch_array($res);
-							if ((($existe== 0) or (($existe== 1) and ($email1== $infos['email']))) and ($pwd1== $pwd2))
+							if ((($existe==0) or (($existe==1) and ($email1==$infos['email']))) and ($pwd1==$pwd2))
 							{
-								if ($pwd1== "")
+								if ($pwd1=="")
 								{
 									$req="UPDATE users SET firstname='$firstname',lastname='$lastname',email='$email1' WHERE idu=$idu";
 								}

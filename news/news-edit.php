@@ -24,7 +24,7 @@
 				{
 					$title=nettoyage($lien,$_REQUEST['title']);
 					$content=nettoyage($lien,$_REQUEST['content']);
-					if($_FILES['image']['name']== "")
+					if($_FILES['image']['name']=="")
 					{
 						$req="UPDATE news SET title='$title',content='$content' WHERE idn=$num";
 					}
@@ -47,7 +47,7 @@
 							echo "Pas d'image ou image invalide<br>";
 							$destination="";
 						}
-						if($destination== "")
+						if($destination=="")
 						{
 							$req="UPDATE news SET title='$title',content='$content' WHERE idn=$num";
 						}
@@ -80,7 +80,7 @@
 				else
 				{
 					$infos=mysqli_fetch_array($res);
-					if(($infos['author']!=$_SESSION['idu'])and($_SESSION['admin']== 0))
+					if(($infos['author']!=$_SESSION['idu'])and($_SESSION['admin']==0))
 					{
 						mysqli_close($lien);
 						header("Location: ../index.php");

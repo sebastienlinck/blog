@@ -30,7 +30,7 @@
 					$email2=nettoyage($lien,$_REQUEST['email2']);
 					$pwd1=$_REQUEST['pwd1'];
 					$pwd2=$_REQUEST['pwd2'];
-					if (($pwd1== $pwd2) and ($email1== $email2))
+					if (($pwd1==$pwd2) and ($email1==$email2))
 					{
 						$req="SELECT * FROM users";
 						$res=mysqli_query($lien,$req);
@@ -41,7 +41,7 @@
 						else
 						{
 							$first_user=0;
-							if (mysqli_num_rows($res)== 0)
+							if (mysqli_num_rows($res)==0)
 							{
 								$first_user=1;
 							}
@@ -55,7 +55,7 @@
 						else
 						{
 							$existe=mysqli_num_rows($res);
-							if (($existe== 0) and ($pwd1== $pwd2))
+							if (($existe==0) and ($pwd1==$pwd2))
 							{
 								$pwd=password_hash($pwd1,PASSWORD_DEFAULT);
 								$req="INSERT INTO users VALUES(NULL,'$firstname','$lastname','$email1','$pwd',$first_user,$first_user)";

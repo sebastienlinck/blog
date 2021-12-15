@@ -27,7 +27,7 @@
 				}
 				else 
 				{
-					if($_SESSION['admin']== 1)
+					if($_SESSION['admin']==1)
 					{
 						echo '<a href="users/activation.php">Gestion des membres</a><br>';
 					}
@@ -62,7 +62,7 @@
 						$ligne="<tr>";
 						$ligne.="<td class='shorttd'>".$infos['date']."</td>";
 						$ligne.="<td><a href='news/news-view.php?num=".$infos['idn']."'>".$infos['title']."</a></td>";
-						if(($connected) and (($_SESSION['idu']== $infos['author']) or ($_SESSION['admin']== 1)))
+						if(($connected) and (($_SESSION['idu']==$infos['author']) or ($_SESSION['admin']==1)))
 						{
 							$ligne.="<td class='shorttd'><a href='news/news-edit.php?num=".$infos['idn']."'>Modifier</a></td>";
 							$ligne.="<td class='shorttd'><a href='news/news-remove.php?num=".$infos['idn']."'>Supprimer</a></td>";

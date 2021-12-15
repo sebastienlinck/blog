@@ -20,7 +20,7 @@
 		else
 		{
 			$infos=mysqli_fetch_array($res);
-			if(($infos['author']!=$_SESSION['idu'])and($_SESSION['admin']== 0))
+			if(($infos['author']!=$_SESSION['idu'])and($_SESSION['admin']==0))
 			{
 				mysqli_close($lien);
 				header("Location: ../index.php");

@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSION['firstname']) or !isset($_SESSION['email']) or ($_SESSION['admin']== 0))
+	if(!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSION['firstname']) or !isset($_SESSION['email']) or ($_SESSION['admin']==0))
 	{
 		header("Location: ../index.php");
 		exit;
@@ -23,11 +23,11 @@
 				if(isset($_REQUEST['num']) and is_numeric($_REQUEST['num']))
 				{
 					$num=nettoyage($lien,$_REQUEST['num']);
-					if (isset($_GET['ac']) and (($_GET['ac']== 1) or ($_GET['ac']== 0)))
+					if (isset($_GET['ac']) and (($_GET['ac']==1) or ($_GET['ac']==0)))
 					{
 						$ac=$_GET['ac'];
 					}
-					if (isset($_GET['ad']) and (($_GET['ad']== 1) or ($_GET['ad']== 0)))
+					if (isset($_GET['ad']) and (($_GET['ad']==1) or ($_GET['ad']==0)))
 					{
 						$ad=$_GET['ad'];
 					}
@@ -54,7 +54,7 @@
 						$ligne.="<td>".$infos['lastname']."</td>";
 						$ligne.="<td>".$infos['email']."</td>";
 						$ligne.="<td>".$infos['active']."</td>";
-						if ($infos['active']== 0) 
+						if ($infos['active']==0) 
 						{
 							$ligne.="<td class='shorttd'><a href='activation.php?num=".$infos['idu']."&ac=1&ad=0'>Inactif</a></td>";
 						}
@@ -62,7 +62,7 @@
 						{
 							$ligne.="<td class='shorttd'><a href='activation.php?num=".$infos['idu']."&ac=0&ad=0'>Actif</a></td>";
 						}
-						if ($infos['admin']== 0) 
+						if ($infos['admin']==0) 
 						{
 							$ligne.="<td class='shorttd'><a href='activation.php?num=".$infos['idu']."&ac=1&ad=0'>Rédacteur</a></td>";
 						}

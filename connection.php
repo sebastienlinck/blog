@@ -30,12 +30,12 @@
 					else
 					{
 						$existe=mysqli_num_rows($res);
-						if($existe== 0){
+						if($existe==0){
 							echo "Informations incorrectes";
 						}
 						else {
 							$infos=mysqli_fetch_array($res);
-							if(password_verify($pwd,$infos['pwd']) and ($infos['active']== 1)) 
+							if(password_verify($pwd,$infos['pwd']) and ($infos['active']==1)) 
 							{
 								session_start();
 								$_SESSION['idu']=$infos['idu'];
