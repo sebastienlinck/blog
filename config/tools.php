@@ -1,11 +1,11 @@
 <?php
-	function nettoyage($liaison, $texte)
+	function nettoyage($liaison,$texte)
 	{
-		return trim(htmlentities(mysqli_real_escape_string($liaison, $texte)));
+		return trim(htmlentities(mysqli_real_escape_string($liaison,$texte)));
 	}
-	function pagination($parpage, $page, $pagephp, $table, $lien) {
+	function pagination($parpage,$page,$pagephp,$table,$lien) {
 		$req="SELECT * FROM $table";
-		$res=mysqli_query($lien, $req);
+		$res=mysqli_query($lien,$req);
 		if(!$res)
 		{
 			echo "Erreur SQL:$req<br>".mysqli_error($lien);

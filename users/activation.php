@@ -19,10 +19,10 @@
 			<?php
 				include('../config/bdd.php');
 				include('../config/tools.php');
-				$lien=mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
+				$lien=mysqli_connect(SERVEUR,LOGIN,MDP,BASE);
 				if(isset($_REQUEST['num']) and is_numeric($_REQUEST['num']))
 				{
-					$num=nettoyage($lien, $_REQUEST['num']);
+					$num=nettoyage($lien,$_REQUEST['num']);
 					if (isset($_GET['ac']) and (($_GET['ac']== 1) or ($_GET['ac']== 0)))
 					{
 						$ac=$_GET['ac'];
@@ -31,15 +31,15 @@
 					{
 						$ad=$_GET['ad'];
 					}
-					$req="UPDATE users set active=$ac, admin=$ad WHERE idu=$num";
-					$res=mysqli_query($lien, $req);
+					$req="UPDATE users set active=$ac,admin=$ad WHERE idu=$num";
+					$res=mysqli_query($lien,$req);
 					if(!$res)
 					{
 						echo "Erreur SQL: $req<br>".mysqli_error($lien);
 					}
 				}
 				$req="SELECT * FROM users";
-				$res=mysqli_query($lien, $req);
+				$res=mysqli_query($lien,$req);
 				if(!$res)
 				{
 					echo "Erreur SQL: $req<br>".mysqli_error($lien);

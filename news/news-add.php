@@ -26,17 +26,17 @@
 				{
 					include('../config/bdd.php');
 					include('../config/tools.php');
-					$lien=mysqli_connect(SERVEUR, LOGIN, MDP, BASE);				
-					$title=nettoyage($lien, $_REQUEST['title']);
-					$content=nettoyage($lien, $_REQUEST['content']);
+					$lien=mysqli_connect(SERVEUR,LOGIN,MDP,BASE);				
+					$title=nettoyage($lien,$_REQUEST['title']);
+					$content=nettoyage($lien,$_REQUEST['content']);
 					$author=$_SESSION['idu'];
 					$date=date("Y-m-d H:i:s");
-					$extensionsvalides=array('gif', 'jpg', 'png', 'jpeg', 'svg');
-					$extension=strtolower(substr(strrchr($_FILES['image']['name'], "."), 1));
-					if(in_array($extension, $extensionsvalides))
+					$extensionsvalides=array('gif','jpg','png','jpeg','svg');
+					$extension=strtolower(substr(strrchr($_FILES['image']['name'],"."),1));
+					if(in_array($extension,$extensionsvalides))
 					{
 						$destination="../images/".uniqid().".$extension";
-						$envoi=move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+						$envoi=move_uploaded_file($_FILES['image']['tmp_name'],$destination);
 						if(!$envoi)
 						{
 							echo "Erreur de transfert<br>";
@@ -48,8 +48,8 @@
 						echo "Pas d'image ou image invalide<br>";
 						$destination="";
 					}
-					$req="INSERT INTO news VALUES(NULL, '$title', '$content', '$author', '$date', '$destination')";
-					$res=mysqli_query($lien, $req);
+					$req="INSERT INTO news VALUES(NULL,'$title','$content','$author','$date','$destination')";
+					$res=mysqli_query($lien,$req);
 					if(!$res)
 					{
 						echo "Erreur SQL: $req<br>".mysqli_error($lien);

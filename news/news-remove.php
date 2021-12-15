@@ -9,10 +9,10 @@
 	{
 		include('../config/bdd.php');
 		include('../config/tools.php');
-		$lien=mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
-		$num=nettoyage($lien, $_REQUEST['num']);
+		$lien=mysqli_connect(SERVEUR,LOGIN,MDP,BASE);
+		$num=nettoyage($lien,$_REQUEST['num']);
 		$req="SELECT * FROM news WHERE idn=$num";
-		$res=mysqli_query($lien, $req);	
+		$res=mysqli_query($lien,$req);	
 		if(!$res)
 		{
 			echo "Erreur SQL: $req<br>".mysqli_error($lien);
@@ -32,7 +32,7 @@
 			}
 		}
 		$req="DELETE FROM news WHERE idn=$num";
-		$res=mysqli_query($lien, $req);	
+		$res=mysqli_query($lien,$req);	
 		if(!$res)
 		{
 			echo "Erreur SQL: $req<br>".mysqli_error($lien);

@@ -18,11 +18,11 @@
 				{
 					include('./config/bdd.php');
 					include('./config/tools.php');
-					$lien=mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
-					$email=nettoyage($lien, $_REQUEST['email']);
+					$lien=mysqli_connect(SERVEUR,LOGIN,MDP,BASE);
+					$email=nettoyage($lien,$_REQUEST['email']);
 					$pwd=$_REQUEST['pwd'];
 					$req="SELECT * FROM users WHERE email='$email'";
-					$res=mysqli_query($lien, $req);
+					$res=mysqli_query($lien,$req);
 					if(!$res)
 					{
 						echo "Erreur SQL: $req<br>".mysqli_error($lien);
@@ -35,7 +35,7 @@
 						}
 						else {
 							$infos=mysqli_fetch_array($res);
-							if(password_verify($pwd, $infos['pwd']) and ($infos['active']== 1)) 
+							if(password_verify($pwd,$infos['pwd']) and ($infos['active']== 1)) 
 							{
 								session_start();
 								$_SESSION['idu']=$infos['idu'];

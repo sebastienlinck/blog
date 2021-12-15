@@ -19,20 +19,20 @@
 			<?php
 				include('../config/bdd.php');				
 				include('../config/tools.php');
-				$lien=mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
+				$lien=mysqli_connect(SERVEUR,LOGIN,MDP,BASE);
 				$idu=$_SESSION['idu'];
 				if(isset($_REQUEST['modifier']))
 				{
-					$lastname=nettoyage($lien, $_REQUEST['lastname']);
-					$firstname=nettoyage($lien, $_REQUEST['firstname']);
-					$email1=nettoyage($lien, $_REQUEST['email1']);
-					$email2=nettoyage($lien, $_REQUEST['email2']);
+					$lastname=nettoyage($lien,$_REQUEST['lastname']);
+					$firstname=nettoyage($lien,$_REQUEST['firstname']);
+					$email1=nettoyage($lien,$_REQUEST['email1']);
+					$email2=nettoyage($lien,$_REQUEST['email2']);
 					$pwd1=$_REQUEST['pwd1'];
 					$pwd2=$_REQUEST['pwd2'];
 					if (($email1== $email2) and ($pwd1== $pwd2))
 					{
 						$req="SELECT * FROM users WHERE email='$email1'";
-						$res=mysqli_query($lien, $req);
+						$res=mysqli_query($lien,$req);
 						if(!$res)
 						{
 							echo "Erreur SQL: $req<br>".mysqli_error($lien);
@@ -45,14 +45,14 @@
 							{
 								if ($pwd1== "")
 								{
-									$req="UPDATE users SET firstname='$firstname', lastname='$lastname', email='$email1' WHERE idu=$idu";
+									$req="UPDATE users SET firstname='$firstname',lastname='$lastname',email='$email1' WHERE idu=$idu";
 								}
 								else 
 								{
-									$pwd=password_hash($pwd1, PASSWORD_DEFAULT);
-									$req="UPDATE users SET firstname='$firstname', lastname='$lastname', email='$email1', pwd='$pwd' WHERE idu=$idu";
+									$pwd=password_hash($pwd1,PASSWORD_DEFAULT);
+									$req="UPDATE users SET firstname='$firstname',lastname='$lastname',email='$email1',pwd='$pwd' WHERE idu=$idu";
 								}
-								$res=mysqli_query($lien, $req);
+								$res=mysqli_query($lien,$req);
 								if(!$res)
 								{
 									echo "Erreur SQL: $req<br>".mysqli_error($lien);
@@ -79,7 +79,7 @@
 					}
 				}
 				$req="SELECT * FROM users WHERE idu=$idu";
-				$res=mysqli_query($lien, $req);
+				$res=mysqli_query($lien,$req);
 				if(!$res)
 				{
 					echo "Erreur SQL: $req<br>".mysqli_error($lien);
@@ -91,10 +91,10 @@
 				<form method="post" enctype="multipart/form-data">
 					<label>Nom : </label><input type="text" name="lastname" value="<?php echo $infos['lastname'];?>"><br>
 					<label>Prénom : </label><input type="text" name="firstname" value="<?php echo $infos['firstname'];?>"><br>
-					<label>Courriel : </label><input type="text" name="email1" id="email1" value="<?php echo $infos['email'];?>" onkeyup="verif('email1', 'email2')"><br>
-					<label>Confirmation courriel : </label><input type="text" name="email2" id="email2" value="<?php echo $infos['email'];?>" onkeyup="verif('email1', 'email2')"><br>
-					<label>Mot de passe : </label><input type="password" name="pwd1" id="pwd1" onkeyup="verif('pwd1', 'pwd2')"><br>
-					<label>Confirmation mot de passe : </label><input type="password" name="pwd2" id="pwd2" onkeyup="verif('pwd1', 'pwd2')"><br>
+					<label>Courriel : </label><input type="text" name="email1" id="email1" value="<?php echo $infos['email'];?>" onkeyup="verif('email1','email2')"><br>
+					<label>Confirmation courriel : </label><input type="text" name="email2" id="email2" value="<?php echo $infos['email'];?>" onkeyup="verif('email1','email2')"><br>
+					<label>Mot de passe : </label><input type="password" name="pwd1" id="pwd1" onkeyup="verif('pwd1','pwd2')"><br>
+					<label>Confirmation mot de passe : </label><input type="password" name="pwd2" id="pwd2" onkeyup="verif('pwd1','pwd2')"><br>
 					<input type="submit" name="modifier" value="Modifier mes informations"><br>
 				</form>
 				<?php

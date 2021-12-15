@@ -18,24 +18,24 @@
 			<?php
 				include('../config/bdd.php');				
 				include('../config/tools.php');
-				$lien=mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
-				$num=nettoyage($lien, $_REQUEST['num']);
+				$lien=mysqli_connect(SERVEUR,LOGIN,MDP,BASE);
+				$num=nettoyage($lien,$_REQUEST['num']);
 				if(isset($_REQUEST['modifier']))
 				{
-					$title=nettoyage($lien, $_REQUEST['title']);
-					$content=nettoyage($lien, $_REQUEST['content']);
+					$title=nettoyage($lien,$_REQUEST['title']);
+					$content=nettoyage($lien,$_REQUEST['content']);
 					if($_FILES['image']['name']== "")
 					{
-						$req="UPDATE news SET title='$title', content='$content' WHERE idn=$num";
+						$req="UPDATE news SET title='$title',content='$content' WHERE idn=$num";
 					}
 					else
 					{
-						$extensionsvalides=array('gif', 'jpg', 'png', 'jpeg', 'svg');
-						$extension=strtolower(substr(strrchr($_FILES['image']['name'], "."), 1));
-						if(in_array($extension, $extensionsvalides))
+						$extensionsvalides=array('gif','jpg','png','jpeg','svg');
+						$extension=strtolower(substr(strrchr($_FILES['image']['name'],"."),1));
+						if(in_array($extension,$extensionsvalides))
 						{
 							$destination="../images/".uniqid().".$extension";
-							$envoi=move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+							$envoi=move_uploaded_file($_FILES['image']['tmp_name'],$destination);
 							if(!$envoi)
 							{
 								echo "Erreur de transfert<br>";
@@ -49,14 +49,14 @@
 						}
 						if($destination== "")
 						{
-							$req="UPDATE news SET title='$title', content='$content' WHERE idn=$num";
+							$req="UPDATE news SET title='$title',content='$content' WHERE idn=$num";
 						}
 						else
 						{
-							$req="UPDATE news SET title='$title', content='$content', image='$destination' WHERE idn=$num";
+							$req="UPDATE news SET title='$title',content='$content',image='$destination' WHERE idn=$num";
 						}
 					}
-					$res=mysqli_query($lien, $req);
+					$res=mysqli_query($lien,$req);
 					if(!$res)
 					{
 						echo "Erreur SQL: $req<br>".mysqli_error($lien);
@@ -72,7 +72,7 @@
 					}
 				}
 				$req="SELECT * FROM news WHERE idn=$num";
-				$res=mysqli_query($lien, $req);
+				$res=mysqli_query($lien,$req);
 				if(!$res)
 				{
 					echo "Erreur SQL: $req<br>".mysqli_error($lien);

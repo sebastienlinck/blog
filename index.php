@@ -37,7 +37,7 @@
 				}
 				include('config/bdd.php');
 				include('config/tools.php');
-				$lien=mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
+				$lien=mysqli_connect(SERVEUR,LOGIN,MDP,BASE);
 				if(!isset($_GET['page']))
 				{
 					$page=1;
@@ -48,8 +48,8 @@
 				}
 				$parpage=2;
 				$premier=$parpage*($page-1);
-				$req="SELECT * FROM news ORDER BY date DESC LIMIT $premier, $parpage";
-				$res=mysqli_query($lien, $req);
+				$req="SELECT * FROM news ORDER BY date DESC LIMIT $premier,$parpage";
+				$res=mysqli_query($lien,$req);
 				if(!$res)
 				{
 					echo "Erreur SQL: $req<br>".mysqli_error($lien);
@@ -71,7 +71,7 @@
 						echo $ligne;
 					}
 					echo "</table>";
-					pagination(2, $page, "index", "news", $lien);
+					pagination(2,$page,"index","news",$lien);
 				}
 				mysqli_close($lien);
 			?>
