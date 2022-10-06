@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1
--- http://www.phpmyadmin.net
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
 --
--- Client :  localhost
--- Généré le :  Jeu 17 Décembre 2020 à 20:09
--- Version du serveur :  5.7.11
--- Version de PHP :  7.2.7
+-- Host: localhost:3306
+-- Generation Time: Sep 20, 2022 at 01:38 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,70 +18,73 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `blog`
+-- Database: `blog`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `news`
+-- Table structure for table `news`
 --
 
 CREATE TABLE `news` (
-  `idn` int(11) NOT NULL,
+  `idn` int NOT NULL,
   `title` varchar(100) NOT NULL,
   `content` text NOT NULL,
-  `author` int(11) NOT NULL,
+  `author` int NOT NULL,
   `date` datetime NOT NULL,
   `image` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
-  `idu` int(11) NOT NULL,
+  `idu` int NOT NULL,
   `email` varchar(100) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `firstnae` varchar(50) NOT NULL,
   `pwd` varchar(50) NOT NULL,
   `admin` tinyint(1) NOT NULL,
-  `active` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `active` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Index pour les tables exportées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `news`
+-- Indexes for table `news`
 --
 ALTER TABLE `news`
-  ADD PRIMARY KEY (`ida`);
+  ADD PRIMARY KEY (`idn`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`idm`);
+  ADD PRIMARY KEY (`idu`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `news`
+-- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `idn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idn` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `idu` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idu` int NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
