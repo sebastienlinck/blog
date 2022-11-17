@@ -44,9 +44,9 @@ CREATE TABLE `news` (
 
 CREATE TABLE `users` (
   `idu` int NOT NULL,
-  `email` varchar(100) NOT NULL,
   `lastname` varchar(50) NOT NULL,
-  `firstnae` varchar(50) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `pwd` varchar(50) NOT NULL,
   `admin` tinyint(1) NOT NULL,
   `active` int NOT NULL
