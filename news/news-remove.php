@@ -30,17 +30,19 @@
 			{
 				unlink($infos['image']);
 			}
+			$req="DELETE FROM news WHERE idn=$num";
+			$res=mysqli_query($lien,$req);	
+			if(!$res)
+			{
+				echo "Erreur SQL: $req<br>".mysqli_error($lien);
+			}
+			else
+			{
+				mysqli_close($lien);
+				header("Location: ../index.php");
+				exit;
+			}
 		}
-		$req="DELETE FROM news WHERE idn=$num";
-		$res=mysqli_query($lien,$req);	
-		if(!$res)
-		{
-			echo "Erreur SQL: $req<br>".mysqli_error($lien);
-		}
-		else
-		{
-			mysqli_close($lien);
-			header("Location: ../index.php");
-		}
+
 	}
 ?>

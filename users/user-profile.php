@@ -3,6 +3,7 @@
 	if(!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSION['firstname']) or !isset($_SESSION['email']))
 	{
 		header("Location: ../index.php");
+		exit;
 	}
 ?>
 <!doctype html>
@@ -41,7 +42,7 @@
 						{
 							$existe=mysqli_num_rows($res);
 							$infos=mysqli_fetch_array($res);
-							if ((($existe==0) or (($existe==1) and ($email1==$infos['email']))) and ($pwd1==$pwd2))
+							if ((($existe==0) or (($existe==1) and ($email1==$infos['email']))))
 							{
 								if ($pwd1=="")
 								{
