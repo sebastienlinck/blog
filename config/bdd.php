@@ -1,6 +1,6 @@
 <?php
-	define("SERVEUR","localhost");
-	define("LOGIN","root");
-	define("MDP","");
-	define("BASE","blog");
+	define('SERVEUR','');
+	define('LOGIN','');
+	define('MDP','');
+	define('BASE','');
 ?>
