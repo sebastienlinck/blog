@@ -54,14 +54,14 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 				$ligne .= "<td>" . $infos['email'] . "</td>";
 				$ligne .= "<td>" . $infos['active'] . "</td>";
 				if ($infos['active'] == 0) {
-					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ac=1&ad=0'>Inactif</a></td>";
+					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ac=1'>Inactif</a></td>";
 				} else {
-					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ac=0&ad=0'>Actif</a></td>";
+					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ac=0'>Actif</a></td>";
 				}
 				if ($infos['admin'] == 0) {
-					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ac=1&ad=0'>Rédacteur</a></td>";
+					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ad=0'>Rédacteur</a></td>";
 				} else {
-					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ac=1&ad=1'>Administrateur</a></td>";
+					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ad=1'>Administrateur</a></td>";
 				}
 				$ligne .= "</tr>";
 				echo $ligne;
