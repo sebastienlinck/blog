@@ -44,10 +44,10 @@ CREATE TABLE `news` (
 
 CREATE TABLE `users` (
   `idu` int NOT NULL,
-  `lastname` varchar(50) NOT NULL,
-  `firstname` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `pwd` varchar(50) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `pwd` varchar(100) NOT NULL,
   `admin` tinyint(1) NOT NULL,
   `active` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;

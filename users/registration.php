@@ -10,6 +10,7 @@
 
 <body>
 	<div id="page">
+		<a href="../">Accueil</a>
 		<h1>Inscription</h1>
 		<form method="post">
 			<label>Nom : </label><input type="text" name="lastname" required><br>
@@ -67,7 +68,6 @@
 			mysqli_close($lien);
 		}
 		?>
-		<a href="../">Accueil</a>
 	</div>
 </body>
 
