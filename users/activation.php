@@ -29,7 +29,15 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 			if (isset($_GET['ad']) and (($_GET['ad'] == 1) or ($_GET['ad'] == 0))) {
 				$ad = $_GET['ad'];
 			}
+			if (isset($ac) and isset($ad) {
 			$req = "UPDATE users set active=$ac,admin=$ad WHERE idu=$num";
+			} 
+			else if (isset($ac)) {
+				$req = "UPDATE users set active=$ac WHERE idu=$num";
+			}
+			else if (isset($ad)) {
+				$req = "UPDATE users set admin=$ad WHERE idu=$num";
+			}
 			$res = mysqli_query($lien, $req);
 			if (!$res) {
 				echo "Erreur SQL: $req<br>" . mysqli_error($lien);
