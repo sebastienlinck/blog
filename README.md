@@ -1,8 +1,8 @@
 # Blog -  TP de Licence Pro
 
-Site PHP simple de publication d'actualités et de gestion de rédacteurs.
-
-La base de données est fournie.
+## Site PHP simple de publication d'actualités et de gestion de rédacteurs.
+- La base de données est fournie.
+- Ne pas oublier de créer un répertoire "images" à la racine du site.
 
 ## Fonctionnement
 1. Le premier utilisateur qui s'inscrit devient administrateur du site.
