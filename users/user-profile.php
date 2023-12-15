@@ -21,20 +21,20 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 		<?php
 		include('../config/bdd.php');
 		include('../config/tools.php');
-		$lien = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
+		$link = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
 		$idu = $_SESSION['idu'];
 		if (isset($_REQUEST['modifier'])) {
-			$lastname = nettoyage($lien, $_REQUEST['lastname']);
-			$firstname = nettoyage($lien, $_REQUEST['firstname']);
-			$email1 = nettoyage($lien, $_REQUEST['email1']);
-			$email2 = nettoyage($lien, $_REQUEST['email2']);
+			$lastname = nettoyage($link, $_REQUEST['lastname']);
+			$firstname = nettoyage($link, $_REQUEST['firstname']);
+			$email1 = nettoyage($link, $_REQUEST['email1']);
+			$email2 = nettoyage($link, $_REQUEST['email2']);
 			$pwd1 = $_REQUEST['pwd1'];
 			$pwd2 = $_REQUEST['pwd2'];
 			if (($email1 == $email2) and ($pwd1 == $pwd2)) {
 				$req = "SELECT * FROM users WHERE email='$email1'";
-				$res = mysqli_query($lien, $req);
+				$res = mysqli_query($link, $req);
 				if (!$res) {
-					echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+					echo "Erreur SQL: $req<br>" . mysqli_error($link);
 				} else {
 					$existe = mysqli_num_rows($res);
 					$infos = mysqli_fetch_array($res);
@@ -45,9 +45,9 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 							$pwd = password_hash($pwd1, PASSWORD_DEFAULT);
 							$req = "UPDATE users SET firstname='$firstname',lastname='$lastname',email='$email1',pwd='$pwd' WHERE idu=$idu";
 						}
-						$res = mysqli_query($lien, $req);
+						$res = mysqli_query($link, $req);
 						if (!$res) {
-							echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+							echo "Erreur SQL: $req<br>" . mysqli_error($link);
 						} else {
 							echo "Profil modifié<br>";
 							$_SESSION['idu'] = $infos['idu'];
@@ -65,9 +65,9 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 			}
 		}
 		$req = "SELECT * FROM users WHERE idu=$idu";
-		$res = mysqli_query($lien, $req);
+		$res = mysqli_query($link, $req);
 		if (!$res) {
-			echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+			echo "Erreur SQL: $req<br>" . mysqli_error($link);
 		} else {
 			$infos = mysqli_fetch_array($res);
 		?>
@@ -82,7 +82,7 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 			</form>
 		<?php
 		}
-		mysqli_close($lien);
+		mysqli_close($link);
 		?>
 		<a href="../">Accueil</a>
 	</div>

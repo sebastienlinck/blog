@@ -19,13 +19,13 @@
 		if (isset($_REQUEST['connexion'])) {
 			include('./config/bdd.php');
 			include('./config/tools.php');
-			$lien = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
-			$email = nettoyage($lien, $_REQUEST['email']);
+			$link = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
+			$email = nettoyage($link, $_REQUEST['email']);
 			$pwd = $_REQUEST['pwd'];
 			$req = "SELECT * FROM users WHERE email='$email'";
-			$res = mysqli_query($lien, $req);
+			$res = mysqli_query($link, $req);
 			if (!$res) {
-				echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+				echo "Erreur SQL: $req<br>" . mysqli_error($link);
 			} else {
 				$existe = mysqli_num_rows($res);
 				if ($existe == 0) {
@@ -39,14 +39,14 @@
 						$_SESSION['firstname'] = $infos['firstname'];
 						$_SESSION['email'] = $infos['email'];
 						$_SESSION['admin'] = $infos['admin'];
-						mysqli_close($lien);
+						mysqli_close($link);
 						header("Location: ./index.php");
 					} else {
 						echo "Informations incorrectes";
 					}
 				}
 			}
-			mysqli_close($lien);
+			mysqli_close($link);
 		}
 		?>
 	</div>

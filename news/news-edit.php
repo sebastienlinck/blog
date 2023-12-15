@@ -19,18 +19,19 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 		<?php
 		include('../config/bdd.php');
 		include('../config/tools.php');
-		$lien = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
-		$num = nettoyage($lien, $_REQUEST['num']);
+		$link = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
+		$num = nettoyage($link, $_REQUEST['num']);
 		if (isset($_REQUEST['modifier'])) {
-			$title = nettoyage($lien, $_REQUEST['title']);
-			$content = nettoyage($lien, $_REQUEST['content']);
+			$title = nettoyage($link, $_REQUEST['title']);
+			$content = nettoyage($link, $_REQUEST['content']);
 			if ($_FILES['image']['name'] == "") {
 				$req = "UPDATE news SET title='$title',content='$content' WHERE idn=$num";
 			} else {
-				$extensionsvalides = array('gif', 'jpg', 'png', 'jpeg', 'svg');
-				$extension = strtolower(substr(strrchr($_FILES['image']['name'], "."), 1));
-				if (in_array($extension, $extensionsvalides)) {
-					$destination = "../images/" . uniqid() . ".$extension";
+				$fichier = $_FILES['image']['name'];
+				$imageType = exif_imagetype($_FILES["image"]["tmp_name"]);
+				$allowedTypes = [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF];
+				if (in_array($fichier, $allowedTypes)) {
+					$destination = "../images/" . uniqid() . "-" . $fichier;
 					$envoi = move_uploaded_file($_FILES['image']['tmp_name'], $destination);
 					if (!$envoi) {
 						echo "Erreur de transfert<br>";
@@ -46,9 +47,9 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 					$req = "UPDATE news SET title='$title',content='$content',image='$destination' WHERE idn=$num";
 				}
 			}
-			$res = mysqli_query($lien, $req);
+			$res = mysqli_query($link, $req);
 			if (!$res) {
-				echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+				echo "Erreur SQL: $req<br>" . mysqli_error($link);
 				unlink($destination);
 			} else {
 				echo "Actualité modifiée<br>";
@@ -58,13 +59,13 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 			}
 		}
 		$req = "SELECT * FROM news WHERE idn=$num";
-		$res = mysqli_query($lien, $req);
+		$res = mysqli_query($link, $req);
 		if (!$res) {
-			echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+			echo "Erreur SQL: $req<br>" . mysqli_error($link);
 		} else {
 			$infos = mysqli_fetch_array($res);
 			if (($infos['author'] != $_SESSION['idu']) and ($_SESSION['admin'] == 0)) {
-				mysqli_close($lien);
+				mysqli_close($link);
 				header("Location: ../index.php");
 				exit;
 			}
@@ -80,7 +81,7 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 			</form>
 		<?php
 		}
-		mysqli_close($lien);
+		mysqli_close($link);
 		?>
 		<a href="../">Accueil</a>
 	</div>

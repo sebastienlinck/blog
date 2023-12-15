@@ -6,16 +6,16 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 } else {
 	include('../config/bdd.php');
 	include('../config/tools.php');
-	$lien = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
-	$num = nettoyage($lien, $_REQUEST['num']);
+	$link = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
+	$num = nettoyage($link, $_REQUEST['num']);
 	$req = "SELECT * FROM news WHERE idn=$num";
-	$res = mysqli_query($lien, $req);
+	$res = mysqli_query($link, $req);
 	if (!$res) {
-		echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+		echo "Erreur SQL: $req<br>" . mysqli_error($link);
 	} else {
 		$infos = mysqli_fetch_array($res);
 		if (($infos['author'] != $_SESSION['idu']) and ($_SESSION['admin'] == 0)) {
-			mysqli_close($lien);
+			mysqli_close($link);
 			header("Location: ../index.php");
 			exit;
 		}
@@ -23,11 +23,11 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 			unlink($infos['image']);
 		}
 		$req = "DELETE FROM news WHERE idn=$num";
-		$res = mysqli_query($lien, $req);
+		$res = mysqli_query($link, $req);
 		if (!$res) {
-			echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+			echo "Erreur SQL: $req<br>" . mysqli_error($link);
 		} else {
-			mysqli_close($lien);
+			mysqli_close($link);
 			header("Location: ../index.php");
 			exit;
 		}

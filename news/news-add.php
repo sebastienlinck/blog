@@ -26,15 +26,16 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 		if (isset($_REQUEST['ajouter'])) {
 			include('../config/bdd.php');
 			include('../config/tools.php');
-			$lien = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
-			$title = nettoyage($lien, $_REQUEST['title']);
-			$content = nettoyage($lien, $_REQUEST['content']);
+			$link = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
+			$title = nettoyage($link, $_REQUEST['title']);
+			$content = nettoyage($link, $_REQUEST['content']);
 			$author = $_SESSION['idu'];
 			$date = date("Y-m-d H:i:s");
-			$extensionsvalides = array('gif', 'jpg', 'png', 'jpeg', 'svg');
-			$extension = strtolower(substr(strrchr($_FILES['image']['name'], "."), 1));
-			if (in_array($extension, $extensionsvalides)) {
-				$destination = "../images/" . uniqid() . ".$extension";
+			$fichier = $_FILES['image']['name'];
+			$imageType = exif_imagetype($_FILES["image"]["tmp_name"]);
+			$allowedTypes = [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF];
+			if (in_array($fichier, $allowedTypes)) {
+				$destination = "../images/" . uniqid() . "-" . $fichier;
 				$envoi = move_uploaded_file($_FILES['image']['tmp_name'], $destination);
 				if (!$envoi) {
 					echo "Erreur de transfert<br>";
@@ -45,13 +46,13 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 				$destination = "";
 			}
 			$req = "INSERT INTO news VALUES(NULL,'$title','$content','$author','$date','$destination')";
-			$res = mysqli_query($lien, $req);
+			$res = mysqli_query($link, $req);
 			if (!$res) {
-				echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+				echo "Erreur SQL: $req<br>" . mysqli_error($link);
 			} else {
 				echo "Actualité ajoutée<br>";
 			}
-			mysqli_close($lien);
+			mysqli_close($link);
 		}
 		?>
 		<a href="../index.php">Accueil</a>

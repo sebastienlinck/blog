@@ -20,9 +20,9 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 		<?php
 		include('../config/bdd.php');
 		include('../config/tools.php');
-		$lien = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
+		$link = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
 		if (isset($_REQUEST['num']) and is_numeric($_REQUEST['num'])) {
-			$num = nettoyage($lien, $_REQUEST['num']);
+			$num = nettoyage($link, $_REQUEST['num']);
 			if (isset($_GET['ac']) and (($_GET['ac'] == 1) or ($_GET['ac'] == 0))) {
 				$ac = $_GET['ac'];
 			}
@@ -36,15 +36,15 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 			} else if (isset($ad)) {
 				$req = "UPDATE users set admin=$ad WHERE idu=$num";
 			}
-			$res = mysqli_query($lien, $req);
+			$res = mysqli_query($link, $req);
 			if (!$res) {
-				echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+				echo "Erreur SQL: $req<br>" . mysqli_error($link);
 			}
 		}
 		$req = "SELECT * FROM users";
-		$res = mysqli_query($lien, $req);
+		$res = mysqli_query($link, $req);
 		if (!$res) {
-			echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+			echo "Erreur SQL: $req<br>" . mysqli_error($link);
 		} else {
 			echo "<table>";
 			while ($infos = mysqli_fetch_array($res)) {
@@ -59,16 +59,16 @@ if (!isset($_SESSION['idu']) or !isset($_SESSION['lastname']) or !isset($_SESSIO
 					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ac=0'>Actif</a></td>";
 				}
 				if ($infos['admin'] == 0) {
-					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ad=0'>Rédacteur</a></td>";
+					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ad=1'>Rédacteur</a></td>";
 				} else {
-					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ad=1'>Administrateur</a></td>";
+					$ligne .= "<td class='shorttd'><a href='activation.php?num=" . $infos['idu'] . "&ad=0'>Administrateur</a></td>";
 				}
 				$ligne .= "</tr>";
 				echo $ligne;
 			}
 			echo "</table>";
 		}
-		mysqli_close($lien);
+		mysqli_close($link);
 		?>
 		<a href="../">Accueil</a>
 	</div>

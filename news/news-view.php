@@ -12,12 +12,12 @@
 		<?php
 		include('../config/bdd.php');
 		include('../config/tools.php');
-		$lien = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
-		$num = nettoyage($lien, $_REQUEST['num']);
+		$link = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
+		$num = nettoyage($link, $_REQUEST['num']);
 		$req = "SELECT * FROM news INNER JOIN users ON news.author=users.idu WHERE idn=$num ";
-		$res = mysqli_query($lien, $req);
+		$res = mysqli_query($link, $req);
 		if (!$res) {
-			echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+			echo "Erreur SQL: $req<br>" . mysqli_error($link);
 		} else {
 			$infos = mysqli_fetch_assoc($res);
 			$html = "<h1>" . $infos['title'] . "</h1>";
@@ -27,7 +27,7 @@
 			$html .= "<p>" . $infos['date'] . "</p>";
 			echo $html;
 		}
-		mysqli_close($lien);
+		mysqli_close($link);
 		?>
 		<a href="../">Retour à l'accueil</a>
 	</div>

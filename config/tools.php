@@ -1,14 +1,14 @@
 <?php
-function nettoyage($lien, $texte)
+function nettoyage($link, $texte)
 {
-	return trim(htmlentities(mysqli_real_escape_string($lien, $texte)));
+	return trim(htmlentities(mysqli_real_escape_string($link, $texte)));
 }
-function pagination($parpage, $page, $pagephp, $table, $lien)
+function pagination($parpage, $page, $pagephp, $table, $link)
 {
 	$req = "SELECT COUNT(*) as nb FROM $table";
-	$res = mysqli_query($lien, $req);
+	$res = mysqli_query($link, $req);
 	if (!$res) {
-		echo "Erreur SQL:$req<br>" . mysqli_error($lien);
+		echo "Erreur SQL:$req<br>" . mysqli_error($link);
 	} else {
 		$nb = mysqli_fetch_array($res)['nb'];
 		$nbpages = ceil($nb / $parpage);

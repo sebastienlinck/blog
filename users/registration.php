@@ -25,18 +25,18 @@
 		if (isset($_REQUEST['inscription'])) {
 			include('../config/bdd.php');
 			include('../config/tools.php');
-			$lien = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
-			$lastname = nettoyage($lien, $_REQUEST['lastname']);
-			$firstname = nettoyage($lien, $_REQUEST['firstname']);
-			$email1 = nettoyage($lien, $_REQUEST['email1']);
-			$email2 = nettoyage($lien, $_REQUEST['email2']);
+			$link = mysqli_connect(SERVEUR, LOGIN, MDP, BASE);
+			$lastname = nettoyage($link, $_REQUEST['lastname']);
+			$firstname = nettoyage($link, $_REQUEST['firstname']);
+			$email1 = nettoyage($link, $_REQUEST['email1']);
+			$email2 = nettoyage($link, $_REQUEST['email2']);
 			$pwd1 = $_REQUEST['pwd1'];
 			$pwd2 = $_REQUEST['pwd2'];
 			if (($pwd1 == $pwd2) and ($email1 == $email2)) {
 				$req = "SELECT * FROM users";
-				$res = mysqli_query($lien, $req);
+				$res = mysqli_query($link, $req);
 				if (!$res) {
-					echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+					echo "Erreur SQL: $req<br>" . mysqli_error($link);
 				} else {
 					$first_user = 0;
 					if (mysqli_num_rows($res) == 0) {
@@ -44,17 +44,17 @@
 					}
 				}
 				$req = "SELECT * FROM users WHERE email='$email1'";
-				$res = mysqli_query($lien, $req);
+				$res = mysqli_query($link, $req);
 				if (!$res) {
-					echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+					echo "Erreur SQL: $req<br>" . mysqli_error($link);
 				} else {
 					$existe = mysqli_num_rows($res);
 					if (($existe == 0) and ($pwd1 == $pwd2)) {
 						$pwd = password_hash($pwd1, PASSWORD_DEFAULT);
 						$req = "INSERT INTO users VALUES(NULL,'$firstname','$lastname','$email1','$pwd',$first_user,$first_user)";
-						$res = mysqli_query($lien, $req);
+						$res = mysqli_query($link, $req);
 						if (!$res) {
-							echo "Erreur SQL: $req<br>" . mysqli_error($lien);
+							echo "Erreur SQL: $req<br>" . mysqli_error($link);
 						} else {
 							echo "Inscription réussie<br>";
 						}
@@ -65,7 +65,7 @@
 			} else {
 				echo "Les mots de passe ou les courriels sont différents<br>";
 			}
-			mysqli_close($lien);
+			mysqli_close($link);
 		}
 		?>
 	</div>
